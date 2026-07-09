@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kshiti Raval — Candidate Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,600;8..60,700&family=IBM+Plex+Mono:wght@400;500;600&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper: #faf9f4;
+    --paper-line: #dcdcd4;
+    --ink: #1e2530;
+    --ink-soft: #5c6472;
+    --pass: #2f7a52;
+    --pass-dim: rgba(47,122,82,0.08);
+    --stamp: #b8392f;
+    --stamp-dim: rgba(184,57,47,0.07);
+    --highlight: #ffd93d;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Source Serif 4', serif;
+    line-height:1.65;
+  }
+
+  ::selection{ background:var(--highlight); color:var(--ink); }
+
+  .mono{ font-family:'IBM Plex Mono', monospace; }
+  .display{ font-family:'Archivo Black', sans-serif; }
+  .sign{ font-family:'Caveat', cursive; }
+
+  a{ color:inherit; }
+
+  .bg-graph{
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(to right, var(--paper-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--paper-line) 1px, transparent 1px);
+    background-size: 34px 34px;
+    opacity:0.5;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  .wrap{ max-width:920px; margin:0 auto; padding:0 32px; position:relative; z-index:1; }
+
+  /* perforated top strip */
+  .perforation{
+    height:14px;
+    width:100%;
+    background-image: radial-gradient(circle, var(--paper) 3.5px, transparent 3.6px);
+    background-size: 22px 14px;
+    background-position: center;
+    background-color:var(--ink);
+    position:relative; z-index:2;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    border-bottom:2px solid var(--ink);
+    background:var(--paper);
+    position:sticky; top:0; z-index:50;
+  }
+  .nav-inner{
+    max-width:920px; margin:0 auto; padding:16px 32px;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .nav-doc{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    letter-spacing:0.04em;
+  }
+  .nav-links{ display:flex; gap:22px; }
+  .nav-links a{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    border-bottom:2px solid transparent;
+    padding-bottom:2px;
+    transition:border-color .2s;
+  }
+  .nav-links a:hover{ border-color:var(--stamp); }
+  @media (max-width:640px){ .nav-links{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  header.hero{ padding:60px 0 70px; border-bottom:2px solid var(--ink); }
+  .doc-meta{
+    display:flex; flex-wrap:wrap; gap:24px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:28px;
+    padding-bottom:16px;
+    border-bottom:1px dashed var(--paper-line);
+  }
+  .doc-meta b{ color:var(--ink); font-weight:600; }
+
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+    flex-wrap:wrap;
+  }
+  h1.name{
+    font-family:'Archivo Black', sans-serif;
+    font-size:clamp(38px, 6.5vw, 60px);
+    line-height:1.02;
+    letter-spacing:-0.01em;
+    max-width:600px;
+  }
+  .role-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-top:14px;
+    max-width:480px;
+  }
+
+  .stamp{
+    font-family:'Archivo Black', sans-serif;
+    font-size:14px;
+    color:var(--pass);
+    border:3px solid var(--pass);
+    border-radius:8px;
+    padding:12px 18px;
+    transform:rotate(-6deg);
+    text-align:center;
+    line-height:1.3;
+    white-space:nowrap;
+    flex-shrink:0;
+  }
+  .stamp small{
+    display:block;
+    font-family:'IBM Plex Mono', monospace;
+    font-weight:400;
+    font-size:10px;
+    letter-spacing:0.08em;
+    margin-top:3px;
+  }
+
+  .hero-actions{
+    display:flex; gap:12px; flex-wrap:wrap;
+    margin-top:32px;
+  }
+  .btn{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12.5px;
+    text-transform:uppercase;
+    letter-spacing:0.04em;
+    padding:11px 20px;
+    border:2px solid var(--ink);
+    transition:all .15s;
+  }
+  .btn-fill{ background:var(--ink); color:var(--paper); }
+  .btn-fill:hover{ background:var(--stamp); border-color:var(--stamp); }
+  .btn-outline:hover{ background:var(--ink); color:var(--paper); }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{ padding:60px 0; border-bottom:2px solid var(--ink); }
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:32px;
+  }
+  .section-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--paper);
+    background:var(--ink);
+    padding:3px 8px;
+    letter-spacing:0.05em;
+  }
+  .section-title{
+    font-family:'Archivo Black', sans-serif;
+    font-size:24px;
+  }
+
+  /* ---------- SKILLS: COVERAGE MATRIX ---------- */
+  table.matrix{
+    width:100%;
+    border-collapse:collapse;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:13px;
+  }
+  table.matrix th, table.matrix td{
+    border:1px solid var(--ink);
+    padding:12px 16px;
+    text-align:left;
+    vertical-align:top;
+  }
+  table.matrix th{
+    background:var(--ink);
+    color:var(--paper);
+    font-weight:600;
+    text-transform:uppercase;
+    font-size:11px;
+    letter-spacing:0.05em;
+    width:170px;
+  }
+  .chip{
+    display:inline-block;
+    background:var(--highlight);
+    padding:2px 8px;
+    margin:2px 4px 2px 0;
+    font-size:12px;
+    border:1px solid var(--ink);
+  }
+  @media (max-width:640px){
+    table.matrix, table.matrix tbody, table.matrix tr, table.matrix td, table.matrix th{ display:block; width:100%; }
+    table.matrix th{ border-bottom:none; }
+  }
+
+  /* ---------- EXPERIENCE: TEST CASE CARDS ---------- */
+  .testcase{
+    border:2px solid var(--ink);
+    margin-bottom:24px;
+    position:relative;
+    background:var(--paper);
+  }
+  .tc-header{
+    display:flex; justify-content:space-between; align-items:center;
+    background:var(--ink); color:var(--paper);
+    padding:10px 18px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.04em;
+  }
+  .tc-body{ padding:22px 24px 24px; }
+  .tc-role{ font-family:'Archivo Black', sans-serif; font-size:19px; margin-bottom:4px; }
+  .tc-company{ font-size:15px; color:var(--ink-soft); margin-bottom:16px; }
+  .tc-field-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    color:var(--stamp);
+    margin-bottom:8px;
+    margin-top:14px;
+  }
+  .tc-body ul{ list-style:none; }
+  .tc-body li{
+    position:relative; padding-left:20px; margin-bottom:8px;
+    font-size:15px;
+  }
+  .tc-body li::before{
+    content:"✓"; position:absolute; left:0; color:var(--pass); font-weight:700;
+    font-family:'IBM Plex Mono', monospace;
+  }
+  .tc-status{
+    position:absolute; top:16px; right:20px;
+    font-family:'Archivo Black', sans-serif;
+    font-size:12px;
+    padding:5px 12px;
+    border:2px solid var(--pass);
+    color:var(--pass);
+    transform:rotate(4deg);
+    background:var(--pass-dim);
+  }
+  .tc-status.closed{ border-color:var(--ink-soft); color:var(--ink-soft); background:transparent; }
+
+  /* ---------- PROJECTS: SPEC SHEETS ---------- */
+  .projects-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .projects-grid{ grid-template-columns:1fr; } }
+  .spec{
+    border:2px dashed var(--ink);
+    padding:22px 24px;
+  }
+  .spec-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:10.5px;
+    color:var(--stamp);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:8px;
+  }
+  .spec-title{ font-family:'Archivo Black', sans-serif; font-size:18px; margin-bottom:10px; }
+  .spec-desc{ font-size:14.5px; color:var(--ink-soft); margin-bottom:16px; }
+  .spec-parts{ display:flex; flex-wrap:wrap; gap:6px; }
+
+  /* ---------- EDUCATION: CERTIFICATION ---------- */
+  .edu-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media (max-width:720px){ .edu-grid{ grid-template-columns:1fr; } }
+  .cert{
+    border:2px solid var(--ink);
+    padding:22px 24px;
+    position:relative;
+  }
+  .cert-degree{ font-family:'Archivo Black', sans-serif; font-size:16px; margin-bottom:4px; }
+  .cert-school{ font-size:14px; color:var(--ink-soft); margin-bottom:14px; }
+  .cert-row{
+    display:flex; justify-content:space-between;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11.5px;
+    border-top:1px dashed var(--paper-line);
+    padding-top:10px;
+  }
+  .cert-row .grade{ color:var(--pass); font-weight:600; }
+
+  /* ---------- STRENGTHS ---------- */
+  .strengths{ display:flex; flex-direction:column; gap:0; }
+  .strength-row{
+    display:flex; gap:16px; align-items:baseline;
+    padding:14px 0;
+    border-bottom:1px dashed var(--paper-line);
+    font-size:15px;
+  }
+  .strength-row:first-child{ border-top:1px dashed var(--paper-line); }
+  .strength-idx{ font-family:'IBM Plex Mono', monospace; color:var(--stamp); font-size:13px; flex-shrink:0; }
+
+  /* ---------- FOOTER ---------- */
+  footer{ padding:60px 0 50px; text-align:center; }
+  .footer-title{ font-family:'Archivo Black', sans-serif; font-size:26px; margin-bottom:8px; }
+  .footer-sub{ color:var(--ink-soft); font-size:15px; margin-bottom:30px; }
+  .footer-actions{ display:flex; justify-content:center; gap:12px; flex-wrap:wrap; margin-bottom:40px; }
+  .signature{
+    font-family:'Caveat', cursive;
+    font-size:36px;
+    margin-bottom:6px;
+  }
+  .footer-meta{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color:var(--ink-soft);
+    border-top:1px solid var(--ink);
+    padding-top:14px;
+    display:inline-block;
+  }
+</style>
+</head>
+<body>
+
+<div class="bg-graph"></div>
+<div class="perforation"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-doc mono">DOC // CANDIDATE-PROFILE // KR-2026</div>
+    <div class="nav-links">
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="doc-meta">
+      <span><b>Subject:</b> Kshiti Raval</span>
+      <span><b>Based in:</b> Gandhinagar, Gujarat</span>
+      <span><b>Rev:</b> July 2026</span>
+    </div>
+
+    <div class="hero-top">
+      <div>
+        <h1 class="name">Kshiti<br>Raval</h1>
+        <p class="role-tag">Data Analyst / Software Developer — Python, SQL &amp; Power BI on
+        the analysis side, full-stack builds and hands-on testing on the other.</p>
+      </div>
+      <div class="stamp">AVAILABLE<small>IMMEDIATE JOINING</small></div>
+    </div>
+
+    <div class="hero-actions">
+      <a class="btn btn-fill" href="mailto:kshitiraval7@gmail.com">Email — kshitiraval7@gmail.com</a>
+      <a class="btn btn-outline" href="tel:9409827568">Call — 9409827568</a>
+    </div>
+  </div>
+</header>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag mono">01</span>
+      <h2 class="section-title">Coverage matrix</h2>
+    </div>
+    <table class="matrix">
+      <tr><th>Languages</th><td><span class="chip">Python</span><span class="chip">HTML</span><span class="chip">CSS</span></td></tr>
+      <tr><th>Databases</th><td><span class="chip">SQL</span><span class="chip">MySQL</span></td></tr>
+      <tr><th>Tools &amp; Platforms</th><td><span class="chip">Power BI</span><span class="chip">Git</span><span class="chip">VS Code</span></td></tr>
+      <tr><th>Concepts</th><td><span class="chip">Data Analysis</span><span class="chip">Data Visualization</span><span class="chip">Data Management</span><span class="chip">Manual Testing</span><span class="chip">SDLC</span><span class="chip">OOP</span></td></tr>
+      <tr><th>Spoken</th><td><span class="chip">English</span><span class="chip">Hindi</span><span class="chip">Gujarati</span></td></tr>
+    </table>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag mono">02</span>
+      <h2 class="section-title">Test cases — work experience</h2>
+    </div>
+
+    <div class="testcase">
+      <div class="tc-header">
+        <span>TC-002 // MAR 2026 – PRESENT</span>
+        <span>HEIGHT8 TECHNOLOGIES, AHMEDABAD</span>
+      </div>
+      <div class="tc-body">
+        <span class="tc-status">RUNNING</span>
+        <div class="tc-role">Software Support Engineer</div>
+        <div class="tc-field-label">Steps performed</div>
+        <ul>
+          <li>Provides software support and troubleshoots technical issues for clients and internal teams.</li>
+          <li>Coordinates with development teams to resolve bugs and keep software running smoothly.</li>
+          <li>Documents support tickets and issue resolutions, and maintains the technical knowledge base.</li>
+          <li>Tests software functionality and reports defects to improve product quality.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="testcase">
+      <div class="tc-header">
+        <span>TC-001 // 2024</span>
+        <span>QSPIDERS, AHMEDABAD</span>
+      </div>
+      <div class="tc-body">
+        <span class="tc-status closed">PASSED</span>
+        <div class="tc-role">Data Science Trainee</div>
+        <div class="tc-field-label">Steps performed</div>
+        <ul>
+          <li>Developed Python scripts for data processing, automation and analysis tasks.</li>
+          <li>Wrote and optimized SQL and MySQL queries for data extraction and reporting.</li>
+          <li>Performed manual testing, including test case creation, bug identification and defect reporting.</li>
+          <li>Built an end-to-end understanding of the Software Development Life Cycle (SDLC).</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag mono">03</span>
+      <h2 class="section-title">Spec sheets — projects</h2>
+    </div>
+    <div class="projects-grid">
+      <div class="spec">
+        <div class="spec-tag">Build — 2024</div>
+        <div class="spec-title">Assignment Management System</div>
+        <div class="spec-desc">Full-stack web app for online assignment submission, with a
+        responsive front end and PHP/MySQL logic handling storage and retrieval.</div>
+        <div class="spec-parts">
+          <span class="chip">HTML</span><span class="chip">CSS</span><span class="chip">PHP</span><span class="chip">MySQL</span>
+        </div>
+      </div>
+      <div class="spec">
+        <div class="spec-tag">Build — 2024</div>
+        <div class="spec-title">Ultrasonic Radar Sensor System</div>
+        <div class="spec-desc">Radar-based sensor system for object detection and avoidance in
+        robotics, with intrusion detection for location-based perimeter monitoring.</div>
+        <div class="spec-parts">
+          <span class="chip">Python</span><span class="chip">Sensor Integration</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="education">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag mono">04</span>
+      <h2 class="section-title">Certifications</h2>
+    </div>
+    <div class="edu-grid">
+      <div class="cert">
+        <div class="cert-degree">Bachelor of Computer Applications</div>
+        <div class="cert-school">B P College Of Computer Studies, Gandhinagar</div>
+        <div class="cert-row"><span>2022 – 2025</span><span class="grade">SGPA 8.34</span></div>
+      </div>
+      <div class="cert">
+        <div class="cert-degree">Higher Secondary Certificate</div>
+        <div class="cert-school">St. Xaviers High School</div>
+        <div class="cert-row"><span>2020 – 2021</span><span class="grade">Completed</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="strengths">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-tag mono">05</span>
+      <h2 class="section-title">Key strengths</h2>
+    </div>
+    <div class="strengths">
+      <div class="strength-row"><span class="strength-idx">A.</span>Strong foundation in data analysis, visualization and database management.</div>
+      <div class="strength-row"><span class="strength-idx">B.</span>Builds and delivers complete web applications independently.</div>
+      <div class="strength-row"><span class="strength-idx">C.</span>Quick learner with a keen interest in data science and analytics.</div>
+      <div class="strength-row"><span class="strength-idx">D.</span>Available for immediate joining — open to full-time on-site or hybrid roles in Gandhinagar/Ahmedabad.</div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="footer-title">Let's work together</div>
+    <div class="footer-sub">Open to full-time Data Analyst or Software Developer roles.</div>
+    <div class="footer-actions">
+      <a class="btn btn-fill" href="mailto:kshitiraval7@gmail.com">kshitiraval7@gmail.com</a>
+      <a class="btn btn-outline" href="tel:9409827568">9409827568</a>
+    </div>
+    <div class="signature">Kshiti Raval</div>
+    <div class="footer-meta mono">Gandhinagar, Gujarat, India — Reviewed &amp; ready for review</div>
+  </div>
+</footer>
+
+</body>
+</html>
